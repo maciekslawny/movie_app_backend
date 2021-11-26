@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'movies_app.apps.Movies_appConfig',
     'rest_framework',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -152,3 +153,5 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
+
+AUTH_USER_MODEL = "accounts.NewUser"
