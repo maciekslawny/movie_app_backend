@@ -41,10 +41,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'movies_app.apps.Movies_appConfig',
     'rest_framework',
-    'accounts',
     'rest_framework_simplejwt.token_blacklist',
+    'accounts',
+    'movies_app',
+    
 ]
 
 MIDDLEWARE = [
@@ -159,7 +160,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000"
 ]
 
-AUTH_USER_MODEL = "accounts.NewUser"
+AUTH_USER_MODEL = "accounts.CustomUser"
 
 SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),

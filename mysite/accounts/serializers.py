@@ -1,6 +1,6 @@
 
 from rest_framework import serializers
-from accounts.models import NewUser
+from accounts.models import CustomUser
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -10,7 +10,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
  
 
     class Meta:
-        model = NewUser
+        model = CustomUser
         fields = ('email', 'user_name', 'password')
         extra_kwargs = {'password': {'write_only': True}}
 
@@ -18,7 +18,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         password = validated_data.pop('password', None)
         # as long as the fields are the same, we can just use this
         instance = self.Meta.model(**validated_data)
-        if password is not None:
-            instance.set_password(password)
+        
+        instance.set_password(password)
         instance.save()
         return instance
