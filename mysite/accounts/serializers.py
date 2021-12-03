@@ -7,8 +7,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     """
     Currently unused in preference of the below.
     """
- 
-
     class Meta:
         model = CustomUser
         fields = ('email', 'user_name', 'password')
@@ -22,3 +20,9 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         instance.set_password(password)
         instance.save()
         return instance
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = '__all__'
