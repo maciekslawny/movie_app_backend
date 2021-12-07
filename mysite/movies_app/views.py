@@ -1,30 +1,29 @@
 from .models import Movie, Person
-from .serializers import MovieSerializer
-from rest_framework import generics
 from .serializers import MovieSerializer, PersonSerializer
+from rest_framework import viewsets
 
-class MovieList(generics.ListCreateAPIView):
+class Movies(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     pass
 
-class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
-
-class ActorsList(generics.ListCreateAPIView):
+class Actors(viewsets.ModelViewSet):
     queryset = Person.objects.filter(kind='actor')
     serializer_class = PersonSerializer
     pass
 
-class DirectorsList(generics.ListCreateAPIView):
+class Directors(viewsets.ModelViewSet):
     queryset = Person.objects.filter(kind='director')
     serializer_class = PersonSerializer
     pass
 
-class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Person.objects.all()
-    serializer_class = PersonSerializer
+# class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Movie.objects.all()
+#     serializer_class = MovieSerializer  
+
+# class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Person.objects.all()
+#     serializer_class = PersonSerializer
 
     
 

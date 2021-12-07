@@ -138,7 +138,7 @@ GitHub.sublime-settings
 
 #enviroment
 my_env
-mysite/movies_app/workspace.code-workspace
+**/workspace.code-workspace
 
 #migrations
 mysite/accounts/migrations
