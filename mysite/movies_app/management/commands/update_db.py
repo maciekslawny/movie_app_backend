@@ -31,11 +31,18 @@ class Command(BaseCommand):
                 elif person_response['gender'] == 2:
                     gender = 'male'
 
+                if person_response['profile_path']:
+                    profile_path = 'https://image.tmdb.org/t/p/w200/' + str(person_response['profile_path'])
+                else:
+                    profile_path = None
+
+
                 Person.objects.create(
                     name=person_response['name'],
                     birthday = person_response['birthday'],
                     gender = gender,
                     kind = kind,
+                    profile_path = profile_path,
                     biography = person_response['biography'],
                     place_of_birth = person_response['place_of_birth'],
                     api_id = person_api_id,
@@ -57,7 +64,7 @@ class Command(BaseCommand):
             added_movie = Movie.objects.create(
                 title=movie['title'],
                 release_date= 2000,
-                poster_url= movie['poster_path'],
+                poster_url= 'https://image.tmdb.org/t/p/w200/' + str(movie['poster_path']),
                 description= movie['overview'][:400],
                 api_id = movie['id'],     
             )
