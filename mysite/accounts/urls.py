@@ -1,9 +1,12 @@
-
-from django.urls import path
-from .views import CustomUserCreate
+from django.urls import path, include
+from .views import Users
+from rest_framework import routers
 
 app_name = 'users'
 
+router = routers.DefaultRouter()
+router.register(r'', Users)
+
 urlpatterns = [
-    path('create/', CustomUserCreate.as_view(), name="create_user"),
+    path('', include(router.urls)),
 ]

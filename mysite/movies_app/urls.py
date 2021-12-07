@@ -1,22 +1,14 @@
-
 from django.urls import path, include
-from .views import MovieList, MovieDetail
-
+from .views import Movies, Actors, Directors
 from rest_framework import routers
 
 app_name = 'movies_app'
 
-
-route = routers.DefaultRouter()
-route.register("", MovieDetail, basename="moviedetail")
-
+router = routers.DefaultRouter()
+router.register(r'actors', Actors)
+router.register(r'directors', Directors)
+router.register(r'', Movies)
 
 urlpatterns = [
-
-    path('', MovieList.as_view(), name='listcreate'),
-    path('<int:pk>', MovieDetail.as_view(), name='detailcreate'),
-
-    # path('add-movies/', add_movies_to_db, name='add-movies'),
-
-
+    path('', include(router.urls)),
 ]
