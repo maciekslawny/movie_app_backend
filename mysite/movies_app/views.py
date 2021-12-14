@@ -1,30 +1,26 @@
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Movie, Person
 from .serializers import MovieSerializer, PersonSerializer
-from rest_framework import viewsets
+
 
 class Movies(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     pass
 
+
 class Actors(viewsets.ModelViewSet):
-    queryset = Person.objects.filter(kind='actor')
+    permission_classes = [IsAuthenticated]
+    queryset = Person.objects.filter(kind="actor")
     serializer_class = PersonSerializer
     pass
+
 
 class Directors(viewsets.ModelViewSet):
-    queryset = Person.objects.filter(kind='director')
+    permission_classes = [IsAuthenticated]
+    queryset = Person.objects.filter(kind="director")
     serializer_class = PersonSerializer
     pass
-
-# class MovieDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Movie.objects.all()
-#     serializer_class = MovieSerializer  
-
-# class PersonDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = Person.objects.all()
-#     serializer_class = PersonSerializer
-
-    
-
-    
