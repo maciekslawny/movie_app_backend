@@ -140,6 +140,3 @@ GitHub.sublime-settings
 my_env
 **/workspace.code-workspace
 
-#migrations
-mysite/accounts/migrations
-mysite/movies_app/migrations
