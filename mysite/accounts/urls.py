@@ -9,7 +9,7 @@ router = routers.DefaultRouter()
 router.register(r"", Users)
 
 router = routers.DefaultRouter()
-router.register(r'', Users)
+router.register(r"", Users)
 
 urlpatterns = [
     path("", include(router.urls)),

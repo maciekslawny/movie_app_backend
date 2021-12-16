@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "accounts",
     "movies_app",
     "ratings",
+    "django_celery_beat",
 ]
 
 MIDDLEWARE = [
@@ -84,19 +85,17 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': BASE_DIR / 'db.sqlite3',
-#    }
-
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('DB_NAME', default='postgres'),
-        'USER': config('DB_USER', default='admin'),
-        'PASSWORD': config('DB_PASSWORD', default='admin'),
-        'HOST': 'localhost', 
-        'PORT': '',
+    #    'default': {
+    #        'ENGINE': 'django.db.backends.sqlite3',
+    #        'NAME': BASE_DIR / 'db.sqlite3',
+    #    }
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME", default="postgres"),
+        "USER": config("DB_USER", default="admin"),
+        "PASSWORD": config("DB_PASSWORD", default="admin"),
+        "HOST": "localhost",
+        "PORT": "",
     }
 }
 

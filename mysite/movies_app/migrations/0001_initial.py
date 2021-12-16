@@ -7,34 +7,73 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Person',
+            name="Person",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=200)),
-                ('birthday', models.DateField(blank=True, null=True)),
-                ('gender', models.CharField(blank=True, choices=[('male', 'Male'), ('famale', 'Famale')], max_length=50)),
-                ('kind', models.CharField(blank=True, choices=[('actor', 'Actor'), ('director', 'Director'), ('other', 'Other')], max_length=50)),
-                ('biography', models.TextField(blank=True, null=True)),
-                ('place_of_birth', models.CharField(blank=True, max_length=200, null=True)),
-                ('profile_path', models.CharField(blank=True, max_length=500, null=True)),
-                ('api_id', models.IntegerField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=200)),
+                ("birthday", models.DateField(blank=True, null=True)),
+                (
+                    "gender",
+                    models.CharField(
+                        blank=True,
+                        choices=[("male", "Male"), ("famale", "Famale")],
+                        max_length=50,
+                    ),
+                ),
+                (
+                    "kind",
+                    models.CharField(
+                        blank=True,
+                        choices=[
+                            ("actor", "Actor"),
+                            ("director", "Director"),
+                            ("other", "Other"),
+                        ],
+                        max_length=50,
+                    ),
+                ),
+                ("biography", models.TextField(blank=True, null=True)),
+                (
+                    "place_of_birth",
+                    models.CharField(blank=True, max_length=200, null=True),
+                ),
+                (
+                    "profile_path",
+                    models.CharField(blank=True, max_length=500, null=True),
+                ),
+                ("api_id", models.IntegerField()),
             ],
         ),
         migrations.CreateModel(
-            name='Movie',
+            name="Movie",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=250)),
-                ('release_date', models.CharField(max_length=250, null=True)),
-                ('poster_url', models.CharField(max_length=5000, null=True)),
-                ('description', models.TextField(null=True)),
-                ('api_id', models.IntegerField()),
-                ('crew', models.ManyToManyField(blank=True, to='movies_app.Person')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=250)),
+                ("release_date", models.CharField(max_length=250, null=True)),
+                ("poster_url", models.CharField(max_length=5000, null=True)),
+                ("description", models.TextField(null=True)),
+                ("api_id", models.IntegerField()),
+                ("crew", models.ManyToManyField(blank=True, to="movies_app.Person")),
             ],
         ),
     ]
