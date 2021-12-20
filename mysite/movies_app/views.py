@@ -5,22 +5,19 @@ from .models import Movie, Person
 from .serializers import MovieSerializer, PersonSerializer
 
 
-class Movies(viewsets.ModelViewSet):
+class MoviesViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
-    pass
 
 
-class Actors(viewsets.ModelViewSet):
+class ActorsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Person.objects.filter(kind="actor")
     serializer_class = PersonSerializer
-    pass
 
 
-class Directors(viewsets.ModelViewSet):
+class DirectorsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Person.objects.filter(kind="director")
     serializer_class = PersonSerializer
-    pass

@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 import os
 
 from celery import Celery
@@ -14,7 +12,7 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 app.conf.beat_schedule = {
     "add-every-day-10-am": {
         "task": "movies_app.tasks.fetch_data_from_api",
-        "schedule": crontab(hour=10, minute=30),
+        "schedule": crontab(hour=11, minute=44),
     }
 }
 

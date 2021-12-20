@@ -8,7 +8,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def create(self, validated_data):
-        user = super(UserSerializer, self).create(validated_data)
+        user = super().create(validated_data)
 
         user.set_password(validated_data["password"])
         user.save()

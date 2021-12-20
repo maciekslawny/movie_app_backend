@@ -1,9 +1,9 @@
+from django.contrib.auth import get_user_model
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework_simplejwt.views import TokenObtainPairView
 
-from .models import CustomUser
 from .serializers import UserSerializer
 
 
@@ -24,8 +24,6 @@ class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
 
-class Users(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticated]
-    queryset = CustomUser.objects.all()
+class UsersViewSet(viewsets.ModelViewSet):
+    queryset = get_user_model().objects.all()
     serializer_class = UserSerializer
-    pass

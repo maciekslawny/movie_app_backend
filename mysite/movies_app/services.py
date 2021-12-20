@@ -4,21 +4,29 @@ from movies_app.models import Movie, Person
 
 def update_db():
 
-    popular_movies = requests.get(
+    response = requests.get(
         "https://api.themoviedb.org/3/movie/popular?api_key=ad616d70a03f15fd5c01caf1b27911b0&language=en-US&page=1"
-    ).json()
+    )
+
+    response.raise_for_status()
+
+    popular_movies = response.json()
 
     def adding_persons(crew_api_ids):
 
         for person_api_id in crew_api_ids:
 
-            if Person.objects.filter(api_id=person_api_id):
+            if Person.objects.filter(api_id=person_api_id).exists():
                 print(person_api_id, "Osoba już w bazie")
                 continue
 
-            person_response = requests.get(
+            response = requests.get(
                 f"https://api.themoviedb.org/3/person/{person_api_id}?api_key=ad616d70a03f15fd5c01caf1b27911b0&language=en-US"
-            ).json()
+            )
+
+            response.raise_for_status()
+
+            person_response = response.json()
 
             if person_response["known_for_department"] == "Acting":
                 kind = "actor"
@@ -29,7 +37,7 @@ def update_db():
 
             gender = ""
             if person_response["gender"] == 1:
-                gender = "famale"
+                gender = "female"
             elif person_response["gender"] == 2:
                 gender = "male"
 
@@ -53,7 +61,7 @@ def update_db():
 
     for movie in popular_movies["results"]:
 
-        if Movie.objects.filter(api_id=movie["id"]):
+        if Movie.objects.filter(api_id=movie["id"]).exists():
             print(movie["title"], "JUZ W BAZIe")
             continue
 
@@ -67,7 +75,7 @@ def update_db():
 
         added_movie = Movie.objects.create(
             title=movie["title"],
-            release_date=2000,
+            release_date=movie["release_date"],
             poster_url="https://image.tmdb.org/t/p/w200/" + str(movie["poster_path"]),
             description=movie["overview"][:400],
             api_id=movie["id"],
