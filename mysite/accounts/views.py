@@ -25,5 +25,5 @@ class MyTokenObtainPairView(TokenObtainPairView):
 
 
 class UsersViewSet(viewsets.ModelViewSet):
-    queryset = get_user_model().objects.all()
+    queryset = get_user_model().objects.all().order_by('id')
     serializer_class = UserSerializer
