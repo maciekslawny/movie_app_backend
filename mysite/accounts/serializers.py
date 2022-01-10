@@ -1,30 +1,15 @@
-
-from rest_framework import serializers
 from accounts.models import CustomUser
-
-
-class RegisterUserSerializer(serializers.ModelSerializer):
-    """
-    Currently unused in preference of the below.
-    """
- 
-
-    class Meta:
-        model = CustomUser
-        fields = ('email', 'user_name', 'password')
-        extra_kwargs = {'password': {'write_only': True}}
-
-    def create(self, validated_data):
-        password = validated_data.pop('password', None)
-        # as long as the fields are the same, we can just use this
-        instance = self.Meta.model(**validated_data)
-        
-        instance.set_password(password)
-        instance.save()
-        return instance
+from rest_framework import serializers
 
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = "__all__"
+
+    def create(self, validated_data):
+        user = super().create(validated_data)
+
+        user.set_password(validated_data["password"])
+        user.save()
+        return user
