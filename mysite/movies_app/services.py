@@ -1,5 +1,6 @@
 import requests
 from movies_app.models import Movie, Person
+from django.db import transaction
 
 
 def update_db():
@@ -59,11 +60,8 @@ def update_db():
                 api_id=person_api_id,
             )
 
-    for movie in popular_movies["results"]:
-
-        if Movie.objects.filter(api_id=movie["id"]).exists():
-            print(movie["title"], "JUZ W BAZIe")
-            continue
+    @transaction.atomic
+    def adding_movie(movie):
 
         print("Dodawanie..", movie["title"])
         movie_cast = requests.get(
@@ -84,3 +82,11 @@ def update_db():
         for api_id in crew_api_ids:
             person = Person.objects.get(api_id=api_id)
             added_movie.crew.add(person)
+
+    for movie in popular_movies["results"]:
+
+        if Movie.objects.filter(api_id=movie["id"]).exists():
+            print(movie["title"], "JUZ W BAZIe")
+            continue
+
+        adding_movie(movie)

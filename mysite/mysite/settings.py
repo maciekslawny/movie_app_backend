@@ -22,10 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config("SECRET_KEY")
+SECRET_KEY = config(
+    "DEBUG",
+    default="django-insecure-^k5441k!5tw^443rhu_8$^xg^-0y_dgrkj)v9-@03mkdjyn6e9",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config("DEBUG")
+DEBUG = config("DEBUG", default="true")
 
 ALLOWED_HOSTS = []
 
@@ -42,7 +45,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "rest_framework",
     "rest_framework_simplejwt.token_blacklist",
-    "django_filters",
     "accounts",
     "movies_app",
     "ratings",
@@ -85,16 +87,12 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    #    'default': {
-    #        'ENGINE': 'django.db.backends.sqlite3',
-    #        'NAME': BASE_DIR / 'db.sqlite3',
-    #    }
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": config("DB_NAME", default="postgres"),
-        "USER": config("DB_USER", default="admin"),
-        "PASSWORD": config("DB_PASSWORD", default="admin"),
-        "HOST": "localhost",
+        "NAME": config("DB_NAME", default="test"),
+        "USER": config("DB_USER", default="test"),
+        "PASSWORD": config("DB_PASSWORD", default="test"),
+        "HOST": config("DB_HOST", default="db"),
         "PORT": "",
     }
 }
